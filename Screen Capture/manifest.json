@@ -7,7 +7,7 @@
 
     "browser_action":
     {
-        "default_icon": "icon-999.png",
+        "default_icon": "icons/cam_logo.png",
         "default_popup": "popup.html"
     },
 
@@ -25,10 +25,10 @@
     "permissions": ["activeTab"],
     "icons": 
     {
-        "32": "images/cam_logo_32.png",
-        "48": "images/cam_logo_48.png",
-        "128": "images/cam_logo_128.png",
-        "256": "images/cam_logo_256.png"
+        "32": "icons/cam_logo_32.png",
+        "48": "icons/cam_logo_48.png",
+        "128": "icons/cam_logo_128.png",
+        "256": "icons/cam_logo_256.png"
     }
 
 }
