@@ -1,0 +1,23 @@
+<html>
+    <head>
+     <title>Screenshot previews</title>
+    </head>
+    
+    <script type="text/javascript">
+    function exitpop()
+    {
+        var screenshot_window = window.open("", "screenshot", "status=1,width=500,height=500");
+    
+        var head = screenshot_window.document.getElementsByTagName("head").item(0);
+        alert(head.innerHTML);
+          var script = my_window.document.createElement ("script");  
+          script.src = "screenshot.js";  
+          head.appendChild (script);
+        alert(head.innerHTML);
+    }
+    </script>
+    
+    <body onunload="javascript: exitpop()" >
+    <h1> Preview of Screenshot</h1>
+    </body>
+    </html>
