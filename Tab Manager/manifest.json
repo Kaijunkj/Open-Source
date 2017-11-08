@@ -1,0 +1,25 @@
+{
+    "manifest_version": 2,
+    "name": "Tab Manager",
+    "version": "0.1",
+
+    "description": "Change tab colour makes easy to differentiate many tabs, allowed tab to auto close or auto refresh based on custom time intervals.",
+
+    "permissions": [
+        "activeTab"
+    ],
+
+    "browser_action": {
+        "default_icon": "icons/tab-manager-32.png",
+        "default_title": "Tab Manager",
+        "default_popup": "popup/setting.html"
+    },
+
+    "web_accessible_resources": [
+
+    ]
+
+
+
+
+}
