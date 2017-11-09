@@ -1,34 +1,27 @@
 {
 
-    "manifest_version": 2,
     "name": "Screenshot",
     "version": "1.0",
     "description": "Capture your webpage",
 
+    "background":
+    {
+        "scripts": ["background.js"]
+    },
+
+    "content_scripts":[
+    {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+    }
+],
+
     "browser_action":
     {
-        "default_icon": "icons/cam_logo.png",
-        "default_popup": "popup.html"
+        "default_icon": "cam_logo.png",
+        "default_title": "Screenshot"
     },
 
-    "commands":
-    {
-        "_execute_browser_action": 
-        {
-            "suggested_key":
-            {
-              "default": "Alt+Shift+P"
-            }
-        }
-    },
-
-    "permissions": ["activeTab"],
-    "icons": 
-    {
-        "32": "icons/cam_logo_32.png",
-        "48": "icons/cam_logo_48.png",
-        "128": "icons/cam_logo_128.png",
-        "256": "icons/cam_logo_256.png"
-    }
-
+    "permissions":["tabs", "<all_urls>", "activeTab"],
+    "manifest_version": 2
 }
