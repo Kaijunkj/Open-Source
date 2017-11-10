@@ -5,12 +5,19 @@
 
     "description": "Change tab colour makes easy to differentiate many tabs, allowed tab to auto close or auto refresh based on custom time intervals.",
 
+    "icons": {
+        "32": "icons/turtle-32.png",
+        "48": "icons/turtle-48.png",
+        "96": "icons/turtle-96.png"
+      },
+
+
     "permissions": [
         "activeTab"
     ],
 
     "browser_action": {
-        "default_icon": "icons/tab-manager-32.png",
+        "default_icon": "icons/turtle-96.png",
         "default_title": "Tab Manager",
         "default_popup": "popup/setting.html"
     },
