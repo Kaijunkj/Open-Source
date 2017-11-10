@@ -1,27 +1,48 @@
 {
 
-    "name": "Screenshot",
-    "version": "1.0",
-    "description": "Capture your webpage",
+    "name": "Youtube Audio",
+    "version": "0.1",
+    "description": "Listen to audio without playing video on Youtube",
+    "manifest_version": 2,
+
+    "icons":
+    {
+        "32": "icons/logo_32.png",
+        "48": "icons/logo_48.png",
+        "128": "icons/logo_128.png",
+        "256": "icons/logo_256.png"
+    },
 
     "background":
     {
         "scripts": ["background.js"]
     },
 
-    "content_scripts":[
+    "permissions":
+    [   
+        "tabs", 
+        "activeTab",
+        "*://*/*",
+        "webRequest",
+        "webRequestBlocking",
+        "storage"
+    ],
+
+    "content_scripts":
+[
     {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
+        "matches": ["*://*/*"],
+        "js": ["content.js"],
+        "css": ["content.css"],
+        "run_at": "document_start",
+        "all_frames": true
     }
 ],
 
     "browser_action":
     {
-        "default_icon": "cam_logo.png",
-        "default_title": "Screenshot"
-    },
+        "default_icon": "icons/logo_48.png",
+        "default_title": "Youtube Audio"
+    }
 
-    "permissions":["tabs", "<all_urls>", "activeTab"],
-    "manifest_version": 2
 }
