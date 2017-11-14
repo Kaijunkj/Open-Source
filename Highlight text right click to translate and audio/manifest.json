@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Translate and Pronounciation",
+    "description": "Highlight text for right click select google translate or pronounciation",
+    "version": "1",
+    "default_locale": "en",
+
+    "icons": {
+        "16": "icons/logo16px.png",
+        "32": "icons/logo32px.png",
+        "48": "icons/logo48px.png",
+        "96": "icons/logo96px.png"
+    },
+
+    "options_ui": {
+        "page": "choices.html"
+    },
+
+    "background": {
+        "scripts": ["translateandpronounce.js"]
+    },
+
+    "permissions": [
+        "contextMenus",
+        "storage"
+    ],
+
+}
