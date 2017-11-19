@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tab Auto Refresh</title>
+    <link href="popup.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container">
+      <table>
+        <tr>
+          <td><input type="button" id="stop" title="Stop REFRESH for current tab"></input></td>
+          <td><input type="button" id="reset" title="Clear REFRESH for all tabs"></input></td>
+        </tr>
+        <tr>
+          <td><p style="font-size: 16px">Interval (sec)</p></td>
+          <td><input type="number" id="interval" min=0 max=100000 title="Time interval to refresh current tab (in seconds)"></input></td>
+        </tr>
+        <tr><td colspan=2><p id="tab" title="Current tab URL"></p></td></tr>
+        <tr><td colspan=2><p id="status">Tab Auto Refresh</p></td></tr>
+      </table>
+    </div>
+    <script src="popup.js" type="text/javascript"></script>
+  </body>
+</html>
