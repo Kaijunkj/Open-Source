@@ -1,8 +1,8 @@
 {
 
-    "name": "Youtube Audio",
+    "name": "YouTube Audio",
     "version": "0.1",
-    "description": "Listen to audio without playing video on Youtube",
+    "description": "Listen to audio without playing video on YouTube",
     "manifest_version": 2,
 
     "icons":
@@ -42,7 +42,7 @@
     "browser_action":
     {
         "default_icon": "icons/logo_48.png",
-        "default_title": "Youtube Audio"
+        "default_title": "YouTube Audio"
     }
 
 }
