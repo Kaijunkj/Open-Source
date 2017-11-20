@@ -99,4 +99,48 @@ function disableExtension()
     tabIds.clear();
 
 }
+function removeURLParameters(url, parameters)
+{
+    parameters.forEach(function(parameter)
+    {
+        var urlparts = url.split('?');
+        if (urlparts.length >= 2) {
+            var prefix = encodeURIComponent(parameter) + '=';
+            var pars = urlparts[1].split(/[&;]/g);
 
+            for (var i = pars.length; i-- > 0;)
+            {
+                if (pars[i].lastIndexOf(prefix, 0) !== -1)
+                {
+                    pars.splice(i, 1);
+                }
+            }
+
+            url = urlparts[0] + '?' + pars.join('&');
+        }
+    });
+    return url;
+}
+
+var Tab_ID = new extension();
+
+function sendMessage(TabID)
+{
+    if (Tab_ID.contains(TabID))
+    {
+        browser.tabs.sendMessage(TabID, {url: Tab_ID.value(TabID)});
+    }
+}
+
+function processRequest(details)
+{
+    if (details.url.indexOf('mime=audio') !== -1)
+    {
+        var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
+        var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
+        if (Tab_ID.value(details.TabID) != audioURL) {
+            Tab_ID.insert(details.TabID, audioURL);
+            browser.tabs.sendMessage(details.TabID, {url: audioURL});
+        }
+    }
+}
