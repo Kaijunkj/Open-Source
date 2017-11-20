@@ -13,20 +13,13 @@
 
 
     "permissions": [
-        "activeTab"
+        "tabs"
     ],
 
     "browser_action": {
+        "browser_style": true,
         "default_icon": "icons/turtle-96.png",
         "default_title": "Tab Manager",
         "default_popup": "popup/setting.html"
-    },
-
-    "web_accessible_resources": [
-
-    ]
-
-
-
-
+    }
 }
