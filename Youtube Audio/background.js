@@ -1,82 +1,101 @@
-var map = (function() {
-    var _maxLength = 200;
+var extension = (function()
+{
+    var maxLength = 200;
 
-    var _map = Object.create(null);
-    var _keys = [];
+    var ext = Object.create(null);
+    var values = [];
 
-    function map() {
-        this.len = function() {
-            return _keys.length;
+    function extension()
+    {
+        this.len = function()
+        {
+            return values.length;
         };
 
-        this.setMaxLength = function(len) {
-            _maxLength = len;
+        this.setMaxLength = function(len)
+        {
+            maxLength = len;
         };
 
-        this.getMaxLength = function() {
-            return _maxLength;
+        this.getMaxLength = function()
+        {
+            return maxLength;
         };
 
-        this.insert = function(key, value) {
+        this.insert = function(key, value)
+        {
             if (this.len.apply() == this.getMaxLength.apply() &&
-                typeof _map[key] == "undefined") {
-                var id = _keys.shift();
-                delete _map[id];
+                typeof ext[key] == "undefined")
+            {
+                var id = values.shift();
+                delete ext[id];
             }
 
-            _map[key] = value;
-            if (!this.contains(key)) {
-                _keys.push(key);
-            }
-        };
-
-        this.value = function(key) {
-            return _map[key];
-        };
-
-        this.contains = function(key) {
-            return typeof _map[key] != "undefined";
-        };
-
-        this.remove = function(key) {
-            if (this.contains(key)) {
-                delete _map[key];
+            ext[key] = value;
+            if (!this.contains(key))
+            {
+                values.push(key);
             }
         };
 
-        this.clear = function() {
-            _map = Object.create(null);
-            _keys = [];
+        this.value = function(key)
+        {
+            return ext[key];
+        };
+
+        this.contains = function(key)
+        {
+            return typeof ext[key] != "undefined";
+        };
+
+        this.remove = function(key)
+        {
+            if (this.contains(key))
+            {
+                delete ext[key];
+            }
+        };
+
+        this.clear = function()
+        {
+            ext = Object.create(null);
+            values = [];
         }
     }
 
-    return map;
+    return extension;
 
 })();
-function enableExtension() {
-    chrome.browserAction.setIcon({
-        path : {
+function enableExtension()
+{
+    broswer.browserAction.setIcon(
+    {
+        path :
+        {
             32 : "icons/logo_32.png",
             48 : "icons/logo_48.png",
         }
     });
-    chrome.tabs.onUpdated.addListener(sendMessage);
-    chrome.webRequest.onBeforeRequest.addListener(
+    broswer.tabs.onUpdated.addListener(sendMessage);
+    broswer.webRequest.onBeforeRequest.addListener(
         processRequest,
         {urls: ["<all_urls>"]},
         ["blocking"]
     );
 }
 
-function disableExtension() {
-    chrome.browserAction.setIcon({
-        path : {
-            32 : "icons/logo_32.png",
-            48 : "icons/logo_48.png",
+function disableExtension()
+{
+    broswer.browserAction.setIcon(
+    {
+        path :
+        {
+            32 : "icons/disabled_32.png",
+            48 : "icons/disabled_48.png",
         }
     });
-    chrome.tabs.onUpdated.removeListener(sendMessage);
-    chrome.webRequest.onBeforeRequest.removeListener(processRequest);
+    broswer.tabs.onUpdated.removeListener(sendMessage);
+    broswer.webRequest.onBeforeRequest.removeListener(processRequest);
     tabIds.clear();
 
 }
