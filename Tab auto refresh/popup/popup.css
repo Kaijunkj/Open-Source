@@ -43,7 +43,7 @@ body {
   input[type="number"] {
     border: 0;
     padding: 0;
-    color: #FFF;
+    color: rgb(0, 0, 0);
     margin: auto;
     outline: none;
     font-size: 28px;
@@ -52,7 +52,7 @@ body {
     width: calc(100% - 7px);
     height: calc(100% - 7px);
     -webkit-appearance: none;
-    background-color: #6ca4fa;
+    background-color: #ff0000;
   }
   
   input[type="number"][disabled] {
@@ -74,21 +74,21 @@ body {
   }
   
   #status {
-    color: #8c26da;
+    color: #000000;
     font-size: 16px;
   }
   
   #stop {
-    background: #8c26da url(stop.png) no-repeat center center;
+    background: #ff0000 url(stop.png) no-repeat center center;
     background-size: 22px;
   }
   
   #reset {
-    background: #8c26da url(reset.png) no-repeat center center;
+    background: #ff0000 url(reset.png) no-repeat center center;
     background-size: 32px;
   }
   
   input[type="button"]:hover {
     cursor: pointer;
-    background-color: #6a1ea5 !important;
+    background-color: #000000 !important;
   }

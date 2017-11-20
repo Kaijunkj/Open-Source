@@ -26,7 +26,7 @@ var notifications = function (e) {
     "message": e,
     "type": "basic",
     "title": "Tab Auto Refresh",
-    "iconUrl": chrome.runtime.getURL("data/icons/64.png")
+    "iconUrl": chrome.runtime.getURL("icons/64.png")
   };
   
   if (notifications_id) {
