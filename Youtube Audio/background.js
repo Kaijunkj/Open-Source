@@ -103,3 +103,25 @@ function removeURLParameters(url, parameters)
     return url;
 }
 
+var Tab_ID = new extension();
+
+function sendMessage(TabID)
+{
+    if (Tab_ID.contains(TabID))
+    {
+        browser.tabs.sendMessage(TabID, {url: Tab_ID.value(TabID)});
+    }
+}
+
+function processRequest(details)
+{
+    if (details.url.indexOf('mime=audio') !== -1)
+    {
+        var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
+        var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
+        if (Tab_ID.value(details.TabID) != audioURL) {
+            Tab_ID.insert(details.TabID, audioURL);
+            browser.tabs.sendMessage(details.TabID, {url: audioURL});
+        }
+    }
+}
