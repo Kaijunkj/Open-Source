@@ -12,6 +12,12 @@
         "128": "icons/logo_128.png",
         "256": "icons/logo_256.png"
     },
+    
+    "browser_action":
+    {
+        "default_icon": "icons/logo_48.png",
+        "default_title": "YouTube Audio"
+    },
 
     "background":
     {
@@ -29,20 +35,14 @@
     ],
 
     "content_scripts":
-[
-    {
+    [
+        {
         "matches": ["*://*/*"],
         "js": ["content.js"],
         "css": ["content.css"],
         "run_at": "document_start",
         "all_frames": true
-    }
-],
-
-    "browser_action":
-    {
-        "default_icon": "icons/logo_48.png",
-        "default_title": "YouTube Audio"
-    }
+        }
+    ]
 
 }
