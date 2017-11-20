@@ -1,5 +1,4 @@
-var extension = (function()
-{
+var extension = (function(){
     var maxLength = 200;
 
     var ext = Object.create(null);
@@ -26,7 +25,7 @@ var extension = (function()
         {
             if (this.len.apply() == this.getMaxLength.apply() &&
                 typeof ext[key] == "undefined")
-            {
+                {
                 var id = values.shift();
                 delete ext[id];
             }
@@ -66,39 +65,7 @@ var extension = (function()
     return extension;
 
 })();
-function enableExtension()
-{
-    broswer.browserAction.setIcon(
-    {
-        path :
-        {
-            32 : "icons/logo_32.png",
-            48 : "icons/logo_48.png",
-        }
-    });
-    broswer.tabs.onUpdated.addListener(sendMessage);
-    broswer.webRequest.onBeforeRequest.addListener(
-        processRequest,
-        {urls: ["<all_urls>"]},
-        ["blocking"]
-    );
-}
 
-function disableExtension()
-{
-    broswer.browserAction.setIcon(
-    {
-        path :
-        {
-            32 : "icons/disabled_32.png",
-            48 : "icons/disabled_48.png",
-        }
-    });
-    broswer.tabs.onUpdated.removeListener(sendMessage);
-    broswer.webRequest.onBeforeRequest.removeListener(processRequest);
-    tabIds.clear();
-
-}
 function removeURLParameters(url, parameters)
 {
     parameters.forEach(function(parameter)
@@ -122,25 +89,73 @@ function removeURLParameters(url, parameters)
     return url;
 }
 
-var Tab_ID = new extension();
 
-function sendMessage(TabID)
+function enableExtension()
 {
-    if (Tab_ID.contains(TabID))
+    browser.browserAction.setIcon(
     {
-        browser.tabs.sendMessage(TabID, {url: Tab_ID.value(TabID)});
-    }
-}
-
-function processRequest(details)
-{
-    if (details.url.indexOf('mime=audio') !== -1)
-    {
-        var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
-        var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
-        if (Tab_ID.value(details.TabID) != audioURL) {
-            Tab_ID.insert(details.TabID, audioURL);
-            browser.tabs.sendMessage(details.TabID, {url: audioURL});
+        path : 
+        {
+            32 : "icons/logo_32.png",
+            48 : "icons/logo_48.png",
         }
-    }
+    });
+    browser.tabs.onUpdated.addListener(sendMessage);
+    browser.webRequest.onBeforeRequest.addListener(
+        processRequest,
+        {urls: ["<all_urls>"]},
+        ["blocking"]
+    );
 }
+
+function disableExtension()
+{
+    browser.browserAction.setIcon(
+    {
+        path :
+        {
+            32 : "icons/disabled_32.png",
+            48 : "icons/disabled_48.png",
+        }
+    });
+    browser.tabs.onUpdated.removeListener(sendMessage);
+    browser.webRequest.onBeforeRequest.removeListener(processRequest);
+    Tab_ID.clear();
+
+}
+
+function saveSettings(disabled)
+{
+    browser.storage.local.set({'YouTube_audio_extension_disabled': disabled});
+}
+
+browser.browserAction.onClicked.addListener(function()
+{
+    browser.storage.local.get('YouTube_audio_extension_disabled', function(values) {
+        var disabled = values.YouTube_audio_extension_disabled;
+
+        if (disabled)
+        {
+            enableExtension();
+        }
+        else
+        {
+            disableExtension();
+        }
+
+        disabled = !disabled;
+        saveSettings(disabled);
+    });
+    browser.tabs.query(
+    {
+        active: true,
+        currentWindow: true,
+        url: "*://www.youtube.com/*"
+    }, function(tabs)
+    {
+        if (tabs.length > 0)
+        {
+            browser.tabs.update(tabs[0].id, {url: tabs[0].url});
+        }
+    });
+});
