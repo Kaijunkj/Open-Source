@@ -67,3 +67,27 @@ var action = function (interval) {
     });
   }
 };
+var load = function () {
+  document.getElementById('reset').addEventListener("click", function (e) {
+    document.getElementById('interval').value = 0;
+    background.send("reset");
+  });
+  
+  document.getElementById('interval').focus();
+  window.removeEventListener("load", load, false);
+  document.getElementById('stop').addEventListener("click", function (e) {action(0)});
+  var elements = Array.prototype.slice.call(document.querySelectorAll("*[title]"));
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener("mouseleave", resetstatus);
+    elements[i].addEventListener("mouseenter", updatestatus);
+  }
+  
+  document.getElementById('interval').addEventListener("change", function (e) {
+    var value = parseInt(e.target.value);
+    if (value > 0 && value < 100000) return action(e.target.value);
+    e.target.value = 0;
+    action(e.target.value);
+  });
+};
+window.addEventListener("load", load, false);
+background.receive("storage", function (e) {if (e) action(e.interval)});
