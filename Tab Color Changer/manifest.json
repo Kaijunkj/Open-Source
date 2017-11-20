@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
-    "name": "Tab Manager",
+    "name": "Tab Color Changer",
     "version": "0.1",
 
-    "description": "Change tab colour makes easy to differentiate many tabs, allowed tab to auto close or auto refresh based on custom time intervals.",
+    "description": "Change tab colour makes easy to differentiate many tabs.",
 
     "icons": {
         "32": "icons/turtle-32.png",
