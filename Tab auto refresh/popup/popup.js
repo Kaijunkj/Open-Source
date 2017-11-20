@@ -53,3 +53,17 @@ var action = function (interval) {
     });
   }
 };
+var action = function (interval) {
+  if (interval > -1) {
+    document.getElementById('interval').value = interval;
+    chrome.tabs.query({"active": true}, function (tabs) {
+      var current = tabs && tabs.length ? tabs[0] : null;
+      if (current) {
+        var valid = current.url.indexOf("http") === 0 || current.url.indexOf("ftp") === 0;
+        document.getElementById('tab').textContent = valid ? "Tab URL: " + current.url : "!!! Invalid Tab !!!";
+        if (valid) background.send("store", {"tab": current, "options": {"interval": interval}});
+        else notifications("Tab Auto Refresh is not working for " + current.url);
+      }
+    });
+  }
+};
