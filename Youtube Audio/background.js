@@ -1,4 +1,5 @@
-var extension = (function(){
+var extension = (function()
+{
     var maxLength = 200;
 
     var ext = Object.create(null);
@@ -89,6 +90,28 @@ function removeURLParameters(url, parameters)
     return url;
 }
 
+var tab_ID = new extension();
+
+function sendMessage(tabId)
+{
+    if (tab_ID.contains(tabId))
+    {
+        browser.tabs.sendMessage(tabId, {url: tab_ID.value(tabId)});
+    }
+}
+
+function processRequest(details)
+{
+    if (details.url.indexOf('mime=audio') !== -1)
+    {
+        var parametersToBeRemoved = ['range', 'rn', 'rbuf'];
+        var audioURL = removeURLParameters(details.url, parametersToBeRemoved);
+        if (tab_ID.value(details.tabId) != audioURL) {
+            tab_ID.insert(details.tabId, audioURL);
+            browser.tabs.sendMessage(details.tabId, {url: audioURL});
+        }
+    }
+}
 
 function enableExtension()
 {
@@ -120,7 +143,7 @@ function disableExtension()
     });
     browser.tabs.onUpdated.removeListener(sendMessage);
     browser.webRequest.onBeforeRequest.removeListener(processRequest);
-    Tab_ID.clear();
+    tab_ID.clear();
 
 }
 
@@ -158,4 +181,22 @@ browser.browserAction.onClicked.addListener(function()
             browser.tabs.update(tabs[0].id, {url: tabs[0].url});
         }
     });
+});
+
+browser.storage.local.get('YouTube_audio_extension_disabled', function(values) {
+    var disabled = values.YouTube_audio_extension_disabled;
+    if (typeof disabled === "undefined")
+    {
+        disabled = false;
+        saveSettings(disabled);
+    }
+
+    if (disabled)
+    {
+        disableExtension();
+    }
+    else
+    {
+        enableExtension();
+    }
 });

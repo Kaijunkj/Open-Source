@@ -1,7 +1,7 @@
 {
 
     "name": "YouTube Audio",
-    "version": "0.1",
+    "version": "1.0",
     "description": "Listen to audio without playing video on YouTube",
     "manifest_version": 2,
 
