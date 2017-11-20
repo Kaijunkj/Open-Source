@@ -27,18 +27,6 @@ app.storage = (function () {
   }
 })();
 
-app.icon = function (id, path, title) {
-  chrome.browserAction.setTitle({"tabId": id, "title": title});
-  chrome.browserAction.setIcon({
-    "tabId": id,
-    "path": {
-      "16": "../../icons/" + path + "/16.png",
-      "32": "../../icons/" + path + "/32.png",
-      "48": "../../icons/" + path + "/48.png",
-      "64": "../../icons/" + path + "/64.png"
-    }
-  });
-};
 
 app.tab = {
   "update": function (id, e) {chrome.tabs.update(id, e, function () {})},
