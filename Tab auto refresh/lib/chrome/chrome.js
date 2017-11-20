@@ -15,7 +15,7 @@ app.storage = (function () {
       document.body.appendChild(script);
     });
   }, 300);
-  /*  */
+ 
   return {
     "read": function (id) {return objs[id]},
     "write": function (id, data) {
@@ -27,6 +27,18 @@ app.storage = (function () {
   }
 })();
 
+app.icon = function (id, path, title) {
+  chrome.browserAction.setTitle({"tabId": id, "title": title});
+  chrome.browserAction.setIcon({
+    "tabId": id,
+    "path": {
+      "16": "../../data/icons/" + path + "/16.png",
+      "32": "../../data/icons/" + path + "/32.png",
+      "48": "../../data/icons/" + path + "/48.png",
+      "64": "../../data/icons/" + path + "/64.png"
+    }
+  });
+};
 
 app.tab = {
   "update": function (id, e) {chrome.tabs.update(id, e, function () {})},
@@ -55,7 +67,7 @@ app.popup = (function () {
       }
     }
   });
-  /*  */
+  
   return {
     "receive": function (id, callback) {_tmp[id] = callback},
     "send": function (id, data, tabId) {
